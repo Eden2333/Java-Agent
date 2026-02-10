@@ -14,7 +14,8 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 自定义基于阿里云知识库服务的 RAG 增强顾问
  */
-@Configuration
+// 最小化启动时注释掉，需要 RAG 功能时取消注释
+//@Configuration
 @Slf4j
 public class LoveAppRagCloudAdvisorConfig {
 

@@ -14,7 +14,8 @@ import java.util.List;
 /**
  * 恋爱大师向量数据库配置（初始化基于内存的向量数据库 Bean）
  */
-@Configuration
+// 最小化启动时注释掉，需要 RAG 功能时取消注释
+//@Configuration
 public class LoveAppVectorStoreConfig {
 
     @Resource

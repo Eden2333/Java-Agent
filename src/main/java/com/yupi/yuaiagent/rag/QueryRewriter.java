@@ -10,7 +10,8 @@ import org.springframework.stereotype.Component;
 /**
  * 查询重写器
  */
-@Component
+// 最小化启动时注释掉，需要 RAG 功能时取消注释
+//@Component
 public class QueryRewriter {
 
     private final QueryTransformer queryTransformer;

@@ -26,7 +26,7 @@ public class AiController {
     private ToolCallback[] allTools;
 
     @Resource
-    private ChatModel dashscopeChatModel;
+    private ChatModel ollamaChatModel;
 
     /**
      * 同步调用 AI 恋爱大师应用
@@ -47,7 +47,7 @@ public class AiController {
      * @param chatId
      * @return
      */
-    @GetMapping(value = "/love_app/chat/sse", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @GetMapping(value = "/love_app/chat/sse", produces = {MediaType.TEXT_EVENT_STREAM_VALUE})
     public Flux<String> doChatWithLoveAppSSE(String message, String chatId) {
         return loveApp.doChatByStream(message, chatId);
     }
@@ -99,7 +99,7 @@ public class AiController {
      */
     @GetMapping("/manus/chat")
     public SseEmitter doChatWithManus(String message) {
-        YuManus yuManus = new YuManus(allTools, dashscopeChatModel);
+        YuManus yuManus = new YuManus(allTools, ollamaChatModel);
         return yuManus.runStream(message);
     }
 }

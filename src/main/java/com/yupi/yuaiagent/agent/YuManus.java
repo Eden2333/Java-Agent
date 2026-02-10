@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class YuManus extends ToolCallAgent {
 
-    public YuManus(ToolCallback[] allTools, ChatModel dashscopeChatModel) {
+    public YuManus(ToolCallback[] allTools, ChatModel ollamaChatModel) {
         super(allTools);
         this.setName("yuManus");
         String SYSTEM_PROMPT = """
@@ -29,7 +29,7 @@ public class YuManus extends ToolCallAgent {
         this.setNextStepPrompt(NEXT_STEP_PROMPT);
         this.setMaxSteps(20);
         // 初始化 AI 对话客户端
-        ChatClient chatClient = ChatClient.builder(dashscopeChatModel)
+        ChatClient chatClient = ChatClient.builder(ollamaChatModel)
                 .defaultAdvisors(new MyLoggerAdvisor())
                 .build();
         this.setChatClient(chatClient);
