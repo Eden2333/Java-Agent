@@ -1,9 +1,10 @@
 # 前端构建阶段
 FROM node:20-alpine AS build
 WORKDIR /app
-COPY . .
+COPY package*.json ./
 RUN npm install
-RUN npm run build
+COPY . .
+RUN npm run build && ls -la dist
 
 # 运行阶段 - 使用 nginx 托管静态文件
 FROM nginx:alpine
