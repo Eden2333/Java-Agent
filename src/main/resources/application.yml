@@ -20,12 +20,12 @@ spring:
       chat:
         model: qwen2.5:3b
 # 临时注释掉，便于大家开发调试和部署（实际需要启动 MCP 服务）
-#    mcp:
-#      client:
-#        sse:
-#          connections:
-#            server1:
-#              url: http://localhost:8127
+    mcp:
+      client:
+        sse:
+          connections:
+            server1:
+              url: http://localhost:8127
 #        stdio:
 #          servers-configuration: classpath:mcp-servers.json
 # 临时注释掉，便于大家开发调试和部署（实际需要启动 PgVector 数据库）

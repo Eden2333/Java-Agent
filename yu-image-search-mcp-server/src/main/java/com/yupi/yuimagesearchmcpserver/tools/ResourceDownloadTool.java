@@ -1,16 +1,18 @@
-package com.yupi.yuaiagent.tools;
+package com.yupi.yuimagesearchmcpserver.tools;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.http.HttpUtil;
-import com.yupi.yuaiagent.constant.FileConstant;
+import com.yupi.yuimagesearchmcpserver.constant.FileConstant;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 
 /**
  * 资源下载工具
  */
+//@Component
 public class ResourceDownloadTool {
 
     @Tool(description = "Download a resource from a given URL")

@@ -134,8 +134,14 @@ public abstract class BaseAgent {
                     String result = "Step " + stepNumber + ": " + stepResult;
                     results.add(result);
                     // 输出当前每一步的结果到 SSE
-                    sseEmitter.send(result);
+                    try {
+                        sseEmitter.send(result);
+                    } catch (IOException e) {
+                        log.error("Error sending step result", e);
+                        throw new RuntimeException(e);
+                    }
                 }
+            try {
                 // 检查是否超出步骤限制
                 if (currentStep >= maxSteps) {
                     state = AgentState.FINISHED;
@@ -144,15 +150,19 @@ public abstract class BaseAgent {
                 }
                 // 正常完成
                 sseEmitter.complete();
+            } catch (IOException e) {
+                log.error("Error sending final message", e);
+                sseEmitter.completeWithError(e);
+            }
             } catch (Exception e) {
                 state = AgentState.ERROR;
                 log.error("error executing agent", e);
                 try {
                     sseEmitter.send("执行错误：" + e.getMessage());
-                    sseEmitter.complete();
                 } catch (IOException ex) {
-                    sseEmitter.completeWithError(ex);
+                    log.error("Error sending error message", ex);
                 }
+                sseEmitter.completeWithError(e);
             } finally {
                 // 3、清理资源
                 this.cleanup();

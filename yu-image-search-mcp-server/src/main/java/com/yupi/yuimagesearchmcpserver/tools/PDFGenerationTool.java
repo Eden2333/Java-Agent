@@ -1,4 +1,4 @@
-package com.yupi.yuaiagent.tools;
+package com.yupi.yuimagesearchmcpserver.tools;
 
 import cn.hutool.core.io.FileUtil;
 import com.itextpdf.kernel.font.PdfFont;
@@ -7,15 +7,17 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
-import com.yupi.yuaiagent.constant.FileConstant;
+import com.yupi.yuimagesearchmcpserver.constant.FileConstant;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
 /**
  * PDF 生成工具
  */
+//@Component
 public class PDFGenerationTool {
 
     @Tool(description = "Generate a PDF file with given content", returnDirect = false)

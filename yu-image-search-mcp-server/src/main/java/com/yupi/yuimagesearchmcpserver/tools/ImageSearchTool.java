@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Service
+//@Service
 public class ImageSearchTool {
 
     // 替换为你的 Pexels API 密钥（需从官网申请）

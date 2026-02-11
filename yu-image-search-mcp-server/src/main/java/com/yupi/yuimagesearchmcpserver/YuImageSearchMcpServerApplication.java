@@ -1,6 +1,6 @@
 package com.yupi.yuimagesearchmcpserver;
 
-import com.yupi.yuimagesearchmcpserver.tools.ImageSearchTool;
+import com.yupi.yuimagesearchmcpserver.tools.*;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.tool.method.MethodToolCallbackProvider;
 import org.springframework.boot.SpringApplication;
@@ -15,9 +15,17 @@ public class YuImageSearchMcpServerApplication {
     }
 
     @Bean
-    public ToolCallbackProvider imageSearchTools(ImageSearchTool imageSearchTool) {
+    public ToolCallbackProvider imageSearchTools() {
+        FileOperationTool fileOperationTool = new FileOperationTool();
+        // WebSearchTool webSearchTool = new WebSearchTool(searchApiKey);
+        WebScrapingTool webScrapingTool = new WebScrapingTool();
+        ResourceDownloadTool resourceDownloadTool = new ResourceDownloadTool();
+        TerminalOperationTool terminalOperationTool = new TerminalOperationTool();
+        PDFGenerationTool pdfGenerationTool = new PDFGenerationTool();
+        TerminateTool terminateTool = new TerminateTool();
+        ImageSearchTool imageSearchTool = new ImageSearchTool();
         return MethodToolCallbackProvider.builder()
-                .toolObjects(imageSearchTool)
+                .toolObjects(fileOperationTool, webScrapingTool, resourceDownloadTool, terminalOperationTool, pdfGenerationTool, terminateTool, imageSearchTool)
                 .build();
     }
 

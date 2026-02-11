@@ -1,13 +1,15 @@
-package com.yupi.yuaiagent.tools;
+package com.yupi.yuimagesearchmcpserver.tools;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
+import org.springframework.stereotype.Component;
 
 /**
  * 网页抓取工具
  */
+//@Component
 public class WebScrapingTool {
 
     @Tool(description = "Scrape the content of a web page")
