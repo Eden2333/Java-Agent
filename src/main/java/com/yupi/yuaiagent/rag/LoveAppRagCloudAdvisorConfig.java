@@ -16,24 +16,24 @@ import org.springframework.context.annotation.Configuration;
  */
 // 最小化启动时注释掉，需要 RAG 功能时取消注释
 //@Configuration
-@Slf4j
-public class LoveAppRagCloudAdvisorConfig {
-
-    @Value("${spring.ai.dashscope.api-key}")
-    private String dashScopeApiKey;
-
-    @Bean
-    public Advisor loveAppRagCloudAdvisor() {
-        DashScopeApi dashScopeApi = DashScopeApi.builder()
-                .apiKey(dashScopeApiKey)
-                .build();
-        final String KNOWLEDGE_INDEX = "恋爱大师";
-        DocumentRetriever dashScopeDocumentRetriever = new DashScopeDocumentRetriever(dashScopeApi,
-                DashScopeDocumentRetrieverOptions.builder()
-                        .withIndexName(KNOWLEDGE_INDEX)
-                        .build());
-        return RetrievalAugmentationAdvisor.builder()
-                .documentRetriever(dashScopeDocumentRetriever)
-                .build();
-    }
-}
+//@Slf4j
+//public class LoveAppRagCloudAdvisorConfig {
+//
+//    @Value("${spring.ai.dashscope.api-key}")
+//    private String dashScopeApiKey;
+//
+//    @Bean
+//    public Advisor loveAppRagCloudAdvisor() {
+//        DashScopeApi dashScopeApi = DashScopeApi.builder()
+//                .apiKey(dashScopeApiKey)
+//                .build();
+//        final String KNOWLEDGE_INDEX = "恋爱大师";
+//        DocumentRetriever dashScopeDocumentRetriever = new DashScopeDocumentRetriever(dashScopeApi,
+//                DashScopeDocumentRetrieverOptions.builder()
+//                        .withIndexName(KNOWLEDGE_INDEX)
+//                        .build());
+//        return RetrievalAugmentationAdvisor.builder()
+//                .documentRetriever(dashScopeDocumentRetriever)
+//                .build();
+//    }
+//}

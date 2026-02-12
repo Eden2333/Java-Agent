@@ -3,22 +3,23 @@ spring:
     name: yu-ai-agent
   profiles:
     active: local
-# 临时注释掉，便于大家开发调试和部署（实际填写 PgVector 数据库信息）
-#  datasource:
-#    url: xxx
-#    username: root
-#    password: 123456
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: root
   ai:
-    dashscope:
-      # 需要替换为你自己的 key
-      api-key: placeholder
-      chat:
-        options:
-          model: qwen-plus
+#    dashscope:
+#      # 需要替换为你自己的 key
+#      api-key: placeholder
+#      chat:
+#        options:
+#          model: qwen-plus
     ollama:
       base-url: http://localhost:11434
       chat:
         model: qwen2.5:3b
+      embedding:
+        model: bge-large
 # 临时注释掉，便于大家开发调试和部署（实际需要启动 MCP 服务）
     mcp:
       client:
@@ -28,13 +29,12 @@ spring:
               url: http://localhost:8127
 #        stdio:
 #          servers-configuration: classpath:mcp-servers.json
-# 临时注释掉，便于大家开发调试和部署（实际需要启动 PgVector 数据库）
-#    vectorstore:
-#      pgvector:
-#        index-type: HNSW
-#        dimensions: 1536
-#        distance-type: COSINE_DISTANCE
-#        max-document-batch-size: 10000 # Optional: Maximum number of documents per batch
+    vectorstore:
+      pgvector:
+        index-type: HNSW
+        dimensions: 1024
+        distance-type: COSINE_DISTANCE
+        max-document-batch-size: 10000
 server:
   port: 8123
   servlet:

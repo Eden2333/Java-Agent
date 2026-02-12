@@ -10,14 +10,13 @@ import org.springframework.stereotype.Component;
 /**
  * 查询重写器
  */
-// 最小化启动时注释掉，需要 RAG 功能时取消注释
-//@Component
+@Component
 public class QueryRewriter {
 
     private final QueryTransformer queryTransformer;
 
-    public QueryRewriter(ChatModel dashscopeChatModel) {
-        ChatClient.Builder builder = ChatClient.builder(dashscopeChatModel);
+    public QueryRewriter(ChatModel ollamaChatModel) {
+        ChatClient.Builder builder = ChatClient.builder(ollamaChatModel);
         // 创建查询重写转换器
         queryTransformer = RewriteQueryTransformer.builder()
                 .chatClientBuilder(builder)
