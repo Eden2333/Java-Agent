@@ -7,34 +7,25 @@ spring:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: root
-  ai:
-#    dashscope:
-#      # 需要替换为你自己的 key
-#      api-key: placeholder
-#      chat:
-#        options:
-#          model: qwen-plus
-    ollama:
-      base-url: http://localhost:11434
-      chat:
-        model: qwen2.5:3b
-      embedding:
-        model: bge-large
-# 临时注释掉，便于大家开发调试和部署（实际需要启动 MCP 服务）
-    mcp:
-      client:
-        sse:
-          connections:
-            server1:
-              url: http://localhost:8127
-#        stdio:
-#          servers-configuration: classpath:mcp-servers.json
-    vectorstore:
-      pgvector:
-        index-type: HNSW
-        dimensions: 1024
-        distance-type: COSINE_DISTANCE
-        max-document-batch-size: 10000
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+
+# LangChain4j 配置
+langchain4j:
+  dashscope:
+    api-key: placeholder
+  ollama:
+    base-url: http://localhost:11434
+    chat-model: qwen2.5:3b
+    embedding-model: bge-large
+
+# MCP Server 配置
+mcp:
+  server:
+    url: http://localhost:8127
 server:
   port: 8123
   servlet:
@@ -60,7 +51,8 @@ knife4j:
 search-api:
   # 需要替换为你自己的 key
   api-key: placeholder
-# 修改日志级别，查看 Spring AI 更多调用细节
+# 修改日志级别，查看 LangChain4j 更多调用细节
 logging:
   level:
-    org.springframework.ai: DEBUG
+    dev.langchain4j: DEBUG
+    dev.langchain4j.model.ollama: DEBUG
