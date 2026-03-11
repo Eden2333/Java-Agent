@@ -51,6 +51,10 @@ knife4j:
 search-api:
   # 需要替换为你自己的 key
   api-key: placeholder
+
+# Pexels API
+pexels:
+  api-key: placeholder
 # 修改日志级别，查看 LangChain4j 更多调用细节
 logging:
   level:

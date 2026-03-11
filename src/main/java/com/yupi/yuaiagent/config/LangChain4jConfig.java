@@ -2,7 +2,7 @@ package com.yupi.yuaiagent.config;
 
 import com.yupi.yuaiagent.aiservice.LoveApp;
 import com.yupi.yuaiagent.store.RedisChatMemoryStore;
-import com.yupi.yuaiagent.tools.McpTools;
+import com.yupi.yuaiagent.tools.*;
 import dev.langchain4j.memory.chat.ChatMemoryProvider;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
 import dev.langchain4j.model.chat.ChatModel;
@@ -76,14 +76,21 @@ public class LangChain4jConfig {
     }
 
     @Bean
-    public LoveApp loveApp(ContentRetriever contentRetriever, McpTools mcpTools) {
+    public LoveApp loveApp(ContentRetriever contentRetriever,
+                           FileOperationTool fileOperationTool,
+                           ImageSearchTool imageSearchTool,
+                           WebScrapingTool webScrapingTool,
+                           ResourceDownloadTool resourceDownloadTool,
+                           PDFGenerationTool pdfGenerationTool,
+                           WebSearchTool webSearchTool) {
         return AiServices.builder(LoveApp.class)
                 .chatModel(ollamaChatLanguageModel())
                 .streamingChatModel(streamingChatModel())
                 .chatMemoryProvider(chatMemoryProvider())
                 // 关闭RAG便于调试
 //                .contentRetriever(contentRetriever)
-                .tools(mcpTools)
+                .tools(fileOperationTool, imageSearchTool, webScrapingTool,
+                       resourceDownloadTool, pdfGenerationTool, webSearchTool)
                 .build();
     }
 }
