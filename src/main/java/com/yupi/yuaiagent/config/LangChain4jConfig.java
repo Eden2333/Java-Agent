@@ -1,6 +1,7 @@
 package com.yupi.yuaiagent.config;
 
 import com.yupi.yuaiagent.aiservice.LoveApp;
+import com.yupi.yuaiagent.annotation.AgentTool;
 import com.yupi.yuaiagent.store.RedisChatMemoryStore;
 import com.yupi.yuaiagent.tools.*;
 import dev.langchain4j.memory.chat.ChatMemoryProvider;
@@ -15,16 +16,19 @@ import dev.langchain4j.rag.content.retriever.ContentRetriever;
 import dev.langchain4j.service.AiServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.Duration;
+import java.util.List;
 
 @Configuration
 @RequiredArgsConstructor
 public class LangChain4jConfig {
 
     private final RedisChatMemoryStore redisChatMemoryStore;
+    private final ApplicationContext applicationContext;
 
     @Value("${langchain4j.dashscope.api-key:placeholder}")
     private String dashscopeApiKey;
@@ -76,21 +80,20 @@ public class LangChain4jConfig {
     }
 
     @Bean
-    public LoveApp loveApp(ContentRetriever contentRetriever,
-                           FileOperationTool fileOperationTool,
-                           ImageSearchTool imageSearchTool,
-                           WebScrapingTool webScrapingTool,
-                           ResourceDownloadTool resourceDownloadTool,
-                           PDFGenerationTool pdfGenerationTool,
-                           WebSearchTool webSearchTool) {
+    public LoveApp loveApp(ContentRetriever contentRetriever) {
+        // 自动扫描所有带 @AgentTool 注解的 Bean
+        List<Object> tools = applicationContext.getBeansWithAnnotation(AgentTool.class)
+                .values()
+                .stream()
+                .toList();
+        
         return AiServices.builder(LoveApp.class)
                 .chatModel(ollamaChatLanguageModel())
                 .streamingChatModel(streamingChatModel())
                 .chatMemoryProvider(chatMemoryProvider())
                 // 关闭RAG便于调试
 //                .contentRetriever(contentRetriever)
-                .tools(fileOperationTool, imageSearchTool, webScrapingTool,
-                       resourceDownloadTool, pdfGenerationTool, webSearchTool)
+                .tools(tools.toArray())
                 .build();
     }
 }

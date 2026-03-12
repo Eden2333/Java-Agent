@@ -7,6 +7,7 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
+import com.yupi.yuaiagent.annotation.AgentTool;
 import com.yupi.yuaiagent.constant.FileConstant;
 import dev.langchain4j.agent.tool.P;
 import dev.langchain4j.agent.tool.Tool;
@@ -18,6 +19,7 @@ import java.io.IOException;
 /**
  * PDF 生成工具
  */
+@AgentTool
 @Slf4j
 @Component
 public class PDFGenerationTool {

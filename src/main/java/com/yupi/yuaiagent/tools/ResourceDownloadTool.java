@@ -2,6 +2,7 @@ package com.yupi.yuaiagent.tools;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.http.HttpUtil;
+import com.yupi.yuaiagent.annotation.AgentTool;
 import com.yupi.yuaiagent.constant.FileConstant;
 import dev.langchain4j.agent.tool.P;
 import dev.langchain4j.agent.tool.Tool;
@@ -13,6 +14,7 @@ import java.io.File;
 /**
  * 资源下载工具
  */
+@AgentTool
 @Slf4j
 @Component
 public class ResourceDownloadTool {

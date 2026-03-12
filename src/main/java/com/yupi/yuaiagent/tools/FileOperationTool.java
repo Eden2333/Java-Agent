@@ -1,6 +1,7 @@
 package com.yupi.yuaiagent.tools;
 
 import cn.hutool.core.io.FileUtil;
+import com.yupi.yuaiagent.annotation.AgentTool;
 import com.yupi.yuaiagent.constant.FileConstant;
 import dev.langchain4j.agent.tool.P;
 import dev.langchain4j.agent.tool.Tool;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 /**
  * 文件操作工具
  */
+@AgentTool
 @Slf4j
 @Component
 public class FileOperationTool {
