@@ -48,8 +48,14 @@ useHead({
 
 const router = useRouter()
 const messages = ref([])
+const chatId = ref('')
 const connectionStatus = ref('disconnected')
 let eventSource = null
+
+// 生成随机会话ID
+const generateChatId = () => {
+  return 'manus_' + Math.random().toString(36).substring(2, 10)
+}
 
 // 添加消息到列表
 const addMessage = (content, isUser, type = '') => {
@@ -107,7 +113,7 @@ const sendMessage = (message) => {
     messageBuffer = []; // 清空缓冲区
   };
   
-  eventSource = chatWithManus(message)
+  eventSource = chatWithManus(message, chatId.value)
   
   // 监听SSE消息
   eventSource.onmessage = (event) => {
@@ -163,6 +169,9 @@ const goBack = () => {
 
 // 页面加载时添加欢迎消息
 onMounted(() => {
+  // 生成聊天ID
+  chatId.value = generateChatId()
+  
   // 添加欢迎消息
   addMessage('你好，我是AI超级智能体。我可以解答各类问题，提供专业建议，请问有什么可以帮助你的吗？', false)
 })

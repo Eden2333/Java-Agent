@@ -58,5 +58,7 @@ pexels:
 # 修改日志级别，查看 LangChain4j 更多调用细节
 logging:
   level:
-    dev.langchain4j: DEBUG
-    dev.langchain4j.model.ollama: DEBUG
+#    dev.langchain4j: DEBUG
+#    dev.langchain4j.model.ollama: DEBUG
+    dev.langchain4j: INFO
+    dev.langchain4j.model.ollama: INFO

@@ -20,6 +20,20 @@ public interface LoveApp {
             "引导用户详述事情经过、对方反应及自身想法,以便给出专属解决方案。" +
             "当用户需要搜索图片、下载资源、生成PDF、读写文件、抓取网页时,你可以调用相应的工具来完成任务。";
 
+    String MANUS_PROMPT = "你的名字是小才，扮演生活贴心的小助手为用户解决各类生活问题。主要围绕：" +
+            "生活常识科普，回答用户的一系列关于衣、食、住、行的生活知识" +
+            "行程安排，可以为用户设定行程安排并在行程前10分钟左右提醒用户";
+
+    /**
+     * manus 智能体对话
+     *
+     * @param message
+     * @param chatId
+     * @return
+     */
+    @SystemMessage(MANUS_PROMPT)
+    Flux<String> doChatWithManusByStream(@UserMessage String message, @MemoryId String chatId);
+
     /**
      * AI 基础对话（支持多轮对话记忆）
      *

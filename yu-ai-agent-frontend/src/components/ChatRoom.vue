@@ -223,7 +223,9 @@ onMounted(() => {
 .message-content {
   font-size: 16px;
   line-height: 1.5;
-  white-space: pre-wrap;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .message-time {

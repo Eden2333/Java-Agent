@@ -19,6 +19,18 @@ public class AiController {
     private final LoveApp loveApp;
 
     /**
+     * SSE 流式调用 manus智能体
+     *
+     * @param message
+     * @param chatId
+     * @return
+     */
+    @GetMapping(value = "/manus/chat", produces = {MediaType.TEXT_EVENT_STREAM_VALUE})
+    public Flux<String> doChatWithManusSSE(String message, String chatId) {
+        return loveApp.doChatWithManusByStream(message, chatId);
+    }
+
+    /**
      * 同步调用 AI 恋爱大师应用
      *
      * @param message
